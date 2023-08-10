@@ -73,6 +73,7 @@ class RVAE(nn.Module):
         device = "cuda" if torch.cuda.is_available() else "cpu"
         codes = []
         for data in data_loader:
+            data = data.to(device)
             # if data.dim() == 4:
             #     data = data.view(-1, data.shape[-1] * data.shape[-2]).to(device)
             # elif data.dim() == 2:

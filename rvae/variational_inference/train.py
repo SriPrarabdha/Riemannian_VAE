@@ -16,6 +16,7 @@ def train_rvae(epoch, train_loader, batch_size, model, optimizer, log_invl, devi
         i=0
         beta = 1
         optimizer.zero_grad()
+        data = data.to(device)
         # data = data.view(-1, data.shape[-1] * data.shape[-2]).to(device)
 
         p_mu, p_sigma, z, q_mu, q_t = model(data)
@@ -53,6 +54,7 @@ def test_rvae(test_loader, batch_size, model, device):
 
     with torch.no_grad():
         for data in test_loader:
+            data = data.to(device)
             # data = data.view(-1, data.shape[-1] * data.shape[-2]).to(device)
             
             p_mu, p_sigma, z, q_mu, q_t = model(data)
@@ -79,6 +81,7 @@ def train_vae(epoch, annealing_epochs, train_loader, batch_size, model, optimize
         i=0
         beta = min(epoch/annealing_epochs, 1)
         optimizer.zero_grad()
+        data = data.to(device)
         # data = data.view(-1, data.shape[-1] * data.shape[-2]).to(device)
         
         p_mu, p_var, z, q_mu, q_var, pr_mu, pr_var = model(data)
@@ -116,6 +119,7 @@ def test_vae(test_loader, b_sz, model, device):
 
     with torch.no_grad():
         for data in test_loader:
+            data = data.to(device)
             # data = data.view(-1, data.shape[-1] * data.shape[-2]).to(device)
             
             p_mu, p_var, z, q_mu, q_var, pr_mu, pr_var = model(data)
