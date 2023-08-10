@@ -72,11 +72,11 @@ class RVAE(nn.Module):
     def _update_latent_codes(self, data_loader):
         device = "cuda" if torch.cuda.is_available() else "cpu"
         codes = []
-        for _, (data, labels) in enumerate(data_loader):
-            if data.dim() == 4:
-                data = data.view(-1, data.shape[-1] * data.shape[-2]).to(device)
-            elif data.dim() == 2:
-                data = data.view(-1, data.shape[-1]).to(device)
+        for data in data_loader:
+            # if data.dim() == 4:
+            #     data = data.view(-1, data.shape[-1] * data.shape[-2]).to(device)
+            # elif data.dim() == 2:
+            #     data = data.view(-1, data.shape[-1]).to(device)
 
             z, _, _ = self.encode(data)
             codes.append(z)
