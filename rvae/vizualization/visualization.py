@@ -93,16 +93,17 @@ def plot_latent_space(model, data_loader, save_dir, device, log_scale=True):
     plt.colorbar()
 
     samples = []
-    labels = []
-    for _, data in enumerate(data_loader):
-        x, y = data[0], data[1]
-        _, _, z, _, _ = model(x.view(-1, 784).to(device))
+    # labels = []
+    for data in data_loader:
+        # x, y = data[0], data[1]
+        _, _, z, _, _ = model(data.to(device))
         samples.append(z)
-        labels.append(y)
+        # labels.append(y)
     
     samples = torch.stack(samples, dim=0).view(-1, 2).detach().cpu().numpy()
-    labels = torch.stack(labels).view(-1).detach().cpu().numpy()
-    plt.scatter(samples[:, 0], samples[:, 1], s=0.7, c=labels)
+    # labels = torch.stack(labels).view(-1).detach().cpu().numpy()
+    # plt.scatter(samples[:, 0], samples[:, 1], s=0.7, c=labels)
+    plt.scatter(samples[:, 0], samples[:, 1], s=0.7)
     plt.savefig(save_dir)
     plt.close()
 
