@@ -100,7 +100,7 @@ def plot_latent_space(model, data_loader, save_dir, device, log_scale=True):
         samples.append(z)
         # labels.append(y)
     
-    samples = torch.stack(samples, dim=0).view(-1, 2).detach().cpu().numpy()
+    samples = torch.vstack(samples).detach().cpu().numpy()
     # labels = torch.stack(labels).view(-1).detach().cpu().numpy()
     # plt.scatter(samples[:, 0], samples[:, 1], s=0.7, c=labels)
     plt.scatter(samples[:, 0], samples[:, 1], s=0.7)
