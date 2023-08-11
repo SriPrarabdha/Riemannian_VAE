@@ -54,12 +54,12 @@ def plot_variance(model, var_dim, samples, savepath, device, log_scale=True):
     samples = samples.detach().cpu().numpy()
     plt.scatter(samples[:, 0], samples[:, 1], s=0.9, c='g')
     plt.savefig(savepath)
-    plt.close()
+
 
 
 def plot_latent_space(model, data_loader, save_dir, device, log_scale=True):
     # set up the grid
-    side = 130
+    side = 60
     step = 1
     x = np.arange(-side, side, step)
     y = np.arange(-side, side, step)
@@ -103,10 +103,9 @@ def plot_latent_space(model, data_loader, save_dir, device, log_scale=True):
     samples = torch.vstack(samples).detach().cpu().numpy()
     # labels = torch.stack(labels).view(-1).detach().cpu().numpy()
     # plt.scatter(samples[:, 0], samples[:, 1], s=0.7, c=labels)
-    print(samples)
+    # print(samples)
     plt.scatter(samples[:, 0], samples[:, 1], s=0.7)
     plt.savefig(save_dir)
-    plt.close()
 
 
 def plot_brownian_motion(model, bm_samples, save_dir, device, log_scale):
@@ -150,7 +149,6 @@ def plot_brownian_motion(model, bm_samples, save_dir, device, log_scale):
     # plt.title("Latent prior sampling")
     plt.colorbar()
     plt.savefig(save_dir)
-    plt.close()
 
 
 def show_reconstructions(data_loader, model, save_dir, device):
@@ -231,6 +229,5 @@ def plot_geodesics(model, data_loader, save_dir, device, log_scale=True):
 
     plt.plot(c_pts[:, 0], c_pts[:, 1], c='k')
     plt.plot(lin_pts[:, 0], lin_pts[:, 1], c='r')
-    plt.show()
 
     return c_pts, lin_pts

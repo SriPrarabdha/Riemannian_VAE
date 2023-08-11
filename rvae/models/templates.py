@@ -35,8 +35,9 @@ class MLP(nn.Module):
         super(MLP, self).__init__()
 
         # take care of the input layer
-        self.net = [nnj.Linear(n_in, layer_defs[0]), act()]
-        self.linear_layers = [nnj.Linear(layer_defs[i], layer_defs[i + 1]) for i in range(len(layer_defs) - 1)]
+        self.net = [nnj.Linear(n_in, layer_defs[0]), act(),nnj.BatchNorm1d(layer_defs[0])]
+        # self.linear_layers = [nnj.Linear(layer_defs[i], layer_defs[i + 1]) for i in range(len(layer_defs) - 1)]
+        self.linear_layers = [nnj.Sequential(nnj.Linear(layer_defs[i] , layer_defs[i+1]) , nnj.BatchNorm1d(layer_defs[i+1])) for i in range(len(layer_defs) - 1)]
 
         for linear in self.linear_layers:
             self.net.extend([
