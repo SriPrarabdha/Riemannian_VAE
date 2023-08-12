@@ -18,7 +18,7 @@ def train_rvae(epoch, train_loader, batch_size, model, optimizer, log_invl, devi
         beta = 1
         optimizer.zero_grad()
         data = data.to(device)
-        data = nn.Sigmoid(data)
+        data = torch.sigmoid(data)
         # data = data.view(-1, data.shape[-1] * data.shape[-2]).to(device)
 
         p_mu, p_sigma, z, q_mu, q_t = model(data)
