@@ -39,7 +39,7 @@ class RVAE(nn.Module):
         self.encoder = MLP(in_dim, enc_layers, act, None)
         self.q_mu = nn.Sequential(
             nn.Linear(enc_layers[-1], latent_dim),
-            nn.BatchNorm1d(latent_dim),
+            # nn.BatchNorm1d(latent_dim),
         )
         self.q_t = nn.Sequential(
             nn.Linear(enc_layers[-1], 1),
