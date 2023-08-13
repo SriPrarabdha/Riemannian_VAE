@@ -38,6 +38,7 @@ def train_rvae(epoch, train_loader, batch_size, model, optimizer, log_invl, devi
             print("Epoch: {}, batch: {}, loss: {:.3f}, KL: {:.3f}".format(
                 epoch, i, loss.item(), kld.item()
             ))
+        i=i+1
     
     train_loss /= n_batches
     train_kld /= n_batches
@@ -103,11 +104,12 @@ def train_vae(epoch, annealing_epochs, train_loader, batch_size, model, optimize
             print("Epoch: {}, batch: {}, loss: {:.3f}, KL: {:.3f}".format(
                 epoch, i, loss.item(), kld.item()
             ))
+        i=i+1
     
     train_loss /= n_batches
     train_kld /= n_batches
     train_rec /= n_batches
-    i=i+1
+    
 
     return train_loss, train_rec, train_kld
 
